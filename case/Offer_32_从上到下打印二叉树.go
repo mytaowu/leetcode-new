@@ -84,3 +84,32 @@ func levelOrder2(root *TreeNode) [][]int {
 
 	return resArr
 }
+
+func levelOrder3(root *TreeNode) [][]int {
+	if root == nil {
+		return [][]int{}
+	}
+	ans := [][]int{}
+	queue := []*TreeNode{root}
+	for level := 0; len(queue) > 0; level++ {
+		vals := []int{}
+		q := queue
+		queue = nil
+		for _, node := range q {
+			vals = append(vals, node.Val)
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+		if level%2 == 1 {
+			for i := 0; i < len(vals)/2; i++ {
+				vals[i], vals[len(vals)-1-i] = vals[len(vals)-1-i], vals[i]
+			}
+		}
+		ans = append(ans, vals)
+	}
+	return ans
+}
