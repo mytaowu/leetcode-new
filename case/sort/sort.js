@@ -77,9 +77,34 @@ function merge(arr1, arr2) {
 }
 
 // 快速排序
-function quickSort(arr) {
+function quickSort(arr, start, end) {
+    if (start < end) {
+        let mid = qSort(arr, start, end)
+        quickSort(arr, start, mid - 1);
+        quickSort(arr, mid + 1, end);
+    }
+}
+
+function qSort(arr, start, end) {
+    let pot = arr[start];
+    while (start < end) {
+        while (start < end && pot <= arr[end]) {
+            end--;
+        }
+        arr[start] = arr[end];
+        while (start < end && pot >= arr[start]) {
+            start++;
+        }
+        arr[end] = arr[start];
+    }
+    arr[start] = pot;
+    return start;
 }
 console.log(bubbleSort([1, 4, 9, 3, 0, 23]))
 console.log(selectionSort([1, 4, 9, 3, 0, 23]))
 console.log(insertionSort([1, 4, 9, 3, 0, 23]))
 console.log(mergeSort([1, 4, 9, 3, 0, 23]))
+
+let args = [1, 4, 9, 3, 0, 23];
+quickSort(args, 0, args.length - 1);
+console.log(args);
