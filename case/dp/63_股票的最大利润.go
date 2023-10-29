@@ -20,6 +20,7 @@ import "math"
 //}
 
 func maxProfit(prices []int) int {
+	number
 	profit := 0
 	minValue := math.MaxInt
 	for i := 0; i < len(prices); i++ {
